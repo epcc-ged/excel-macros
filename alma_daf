@@ -1,0 +1,79 @@
+Sub alma_daf()
+'
+' alma_daf Macro
+' toilettage du excel des lignes de commandes d'alma
+' export complet avec interface langue française
+' pour envoi à la DAF
+'
+
+' suppression des colonnes inutiles
+    Columns("B:G").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("C:E").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("F:F").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("G:Q").Select
+    Selection.Delete Shift:=xlToLeft
+    Range("F8").Select
+    ActiveWindow.ScrollColumn = 3
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    
+' traitement colonne quantités
+    Columns("D:D").Select
+    Selection.Replace What:="GED -  Bureaux du GED (", Replacement:="", LookAt _
+        :=xlPart, SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+        ReplaceFormat:=False
+    Selection.Replace What:=")", Replacement:="", LookAt:=xlPart, _
+        SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+        ReplaceFormat:=False
+
+' formatage du prix
+    Columns("E:E").Select
+    Selection.Replace What:=" EUR", Replacement:="", LookAt:=xlPart, _
+        SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+        ReplaceFormat:=False
+    Selection.Replace What:=".", Replacement:=",", LookAt:=xlPart, _
+        SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+        ReplaceFormat:=False
+    Selection.TextToColumns Destination:=Range("E1"), DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=True, _
+        Semicolon:=False, Comma:=False, Space:=False, Other:=False, FieldInfo _
+        :=Array(1, 1), TrailingMinusNumbers:=True
+    Selection.NumberFormat = _
+        "_-* #,##0.00 [$€-fr-FR]_-;-* #,##0.00 [$€-fr-FR]_-;_-* ""-""?? [$€-fr-FR]_-;_-@_-"
+
+' changements intitulés de colonnes
+    Range("A1").Select
+    ActiveCell.FormulaR1C1 = "itemDescriptonDisplay"
+    Range("A1").Select
+    ActiveCell.FormulaR1C1 = "Titre"
+    Range("B1").Select
+    ActiveCell.FormulaR1C1 = "ISBN "
+    Range("C1").Select
+    ActiveCell.FormulaR1C1 = "Réf. Alma"
+    Range("D1").Select
+    ActiveCell.FormulaR1C1 = "Nbre d'ex."
+    Range("E1").Select
+    ActiveCell.FormulaR1C1 = "Prix total"
+    Range("F1").Select
+    ActiveCell.FormulaR1C1 = "Fournisseur"
+    Range("I1").Select
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 3
+    ActiveWindow.ScrollColumn = 4
+    ActiveWindow.ScrollColumn = 5
+    ActiveWindow.ScrollColumn = 6
+    ActiveWindow.ScrollColumn = 7
+    ActiveWindow.ScrollColumn = 6
+    ActiveWindow.ScrollColumn = 5
+    ActiveWindow.ScrollColumn = 4
+
+' suppression colonne statistiques 3 (codes type C23, etc)
+    Columns("I:I").Select
+    Selection.Delete Shift:=xlToLeft
+    
+End Sub
