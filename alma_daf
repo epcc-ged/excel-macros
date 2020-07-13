@@ -1,9 +1,6 @@
 Sub alma_daf()
 '
 ' alma_daf Macro
-' toilettage du excel des lignes de commandes d'alma
-' export complet avec interface langue française
-' pour envoi à la DAF
 '
 
 ' suppression des colonnes inutiles
@@ -56,24 +53,15 @@ Sub alma_daf()
     Range("D1").Select
     ActiveCell.FormulaR1C1 = "Nbre d'ex."
     Range("E1").Select
-    ActiveCell.FormulaR1C1 = "Prix total"
+    ActiveCell.FormulaR1C1 = "Prix TTC"
     Range("F1").Select
     ActiveCell.FormulaR1C1 = "Fournisseur"
     Range("I1").Select
-    ActiveWindow.ScrollColumn = 2
-    ActiveWindow.ScrollColumn = 1
-    ActiveWindow.ScrollColumn = 2
-    ActiveWindow.ScrollColumn = 3
-    ActiveWindow.ScrollColumn = 4
-    ActiveWindow.ScrollColumn = 5
-    ActiveWindow.ScrollColumn = 6
-    ActiveWindow.ScrollColumn = 7
-    ActiveWindow.ScrollColumn = 6
-    ActiveWindow.ScrollColumn = 5
-    ActiveWindow.ScrollColumn = 4
-
-' suppression colonne statistiques 3 (codes type C23, etc)
-    Columns("I:I").Select
+    
+' suppression colonne Fournisseur
+    Columns("F:F").Select
     Selection.Delete Shift:=xlToLeft
     
 End Sub
+
+
